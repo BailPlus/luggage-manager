@@ -1,0 +1,1 @@
+main = lambda *argv:print(*argv)
