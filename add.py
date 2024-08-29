@@ -36,6 +36,8 @@ classid(str):该物品所属的类别
 name(str):物品名称
 返回值:新物品的id(str)'''
     # 获取物品id
+    if classid not in nextids:
+        nextids[classid] = '01'
     itemid = classid + nextids[classid]
     # 更新字典中的下一个id
     nextid = hex(int(itemid[-2:],16)+1)[2:]

@@ -1,12 +1,11 @@
 #!/usr/bin/python3
 #Copyright Bail 2024
-#luggage-namager 行李管家 v1.0_1
+#luggage-namager 行李管家
 #2024.8.26-2024.8.28
 
-VERSION = 'v1.0'
-VERCODE = 1
+VERSION = 'v1.0.2'
+VERCODE = 3
 FUNCTIONS = ('test','add')  # 功能列表，用于解析sys.argv[1]
-DATA = u'/sdcard/Bail/行李清单'
 
 import sys,os,libfile
 
