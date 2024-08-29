@@ -3,8 +3,8 @@
 #luggage-namager 行李管家
 #2024.8.26-2024.8.28
 
-VERSION = 'v1.0.2'
-VERCODE = 3
+VERSION = 'v1.0.3'
+VERCODE = 4
 FUNCTIONS = ('test','add')  # 功能列表，用于解析sys.argv[1]
 
 import sys,os,libfile
@@ -14,6 +14,8 @@ def init():
 def welcome():
     '''欢迎页'''
     print(f'行李管家 {VERSION}_{VERCODE}')
+def help():
+    print(FUNCTIONS)
 def interactive():
     '''交互式运行'''
     while True:
@@ -32,6 +34,8 @@ def main():
     if len(sys.argv) == 1:  # 直接运行
         welcome()
         interactive()
+    elif sys.argv[1] in ('help','-h','-help','--help'):
+        help()
     else:   # 带参数运行
         func = sys.argv[1]
         if func in FUNCTIONS:
