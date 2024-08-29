@@ -55,9 +55,9 @@ itemid(int):物品id，用作文件名
     if not os.getenv('TERMUX_VERSION'):
         print('非termux环境运行，跳过拍照')
         return
-    filename = {IMG}/{itemid}.jpg
+    filename = f'{IMG}/{itemid}.jpg'
     os.system(f'termux-camera-photo {filename}')
-    __import__('imgcompress').compress((filename))
+    __import__('imgcompress').compress((filename,))
 def main(args):
     getid()
     if not args:
@@ -68,5 +68,5 @@ def main(args):
         else:
             itemid = register(*args[:2])
             if '--no-photo' not in args:
-                takephoto()
+                takephoto(itemid)
             print(f'注册成功！物品id：{itemid}')
