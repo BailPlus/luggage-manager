@@ -1,4 +1,4 @@
-DEBUG = True
+DEBUG = False
 def debug(*args,**kw):
     if not DEBUG:
         return
