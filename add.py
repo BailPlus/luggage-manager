@@ -29,6 +29,7 @@ iscontainer(bool):是否添加容器
     # 创建对象
     item = libclass.Item(name,placeid if iscontainer else 0)
     itemclass.add(item.id)
+    return item.id
 def takephoto(itemid:int):
     '''拍照
 itemid(int):物品id，用作文件名
