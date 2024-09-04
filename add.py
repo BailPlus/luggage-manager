@@ -22,7 +22,7 @@ iscontainer(bool):是否添加容器
 返回值:物品id(int)'''
     # 选择类别
     itemclassid = libchoose.choose_classid()
-    itemclass:libclass.Class = read(itemclassid)
+    itemclass:libclass.Class = read(itemclassid) # type: ignore
     # 选择容器
     if iscontainer:
         placeid = libchoose.choose_placeid()

@@ -12,11 +12,11 @@ parentid(int):已选择的父类别id
         # 显示子类别
         for i,j in enumerate(classobj.subclasses):
             print('\t'.join((str(i),str(libfile.read(j))+'/')))
-            userinput = input('请选择一个类别，以空行结束 >')
-            if userinput:
-                parentid = classobj.subclasses[int(userinput)]
-            else:
-                break
+        userinput = input('请选择一个类别，以空行结束 >')
+        if userinput:
+            parentid = classobj.subclasses[int(userinput)]
+        else:
+            break
     return parentid
 def choose_class(parentid:int=libfile.rootclass.id)->libclass.Class:
     '''引导用户选择类别
@@ -67,6 +67,7 @@ def choose_placeid()->int:
 **从根类别下的“容器”类别中选择**
 '''
     rootclass = libfile.rootclass
+    # 寻找“容器”类别
     for i in rootclass.subclasses:
         if str(libfile.read(i)) == '容器':
             container_classid = i
