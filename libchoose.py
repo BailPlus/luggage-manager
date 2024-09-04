@@ -32,12 +32,14 @@ parentid(int):已选择的父类别id
         classobj:libclass.Class = libfile.read(parentid)
         for i,j in enumerate(classobj.subclasses):
             print('\t'.join((str(i),str(libfile.read(j)))))
+        offset = len(classobj.subclasses)
+        print('-'*10)
         for i,j in enumerate(classobj.items):
-            print('\t'.join((str(i),str(libfile.read(j)))))
+            print('\t'.join((str(i+offset),str(libfile.read(j)))))
         userinput = int(input('请选择一个物品 >'))
-        if userinput >= len(classobj.subclasses):
+        if userinput >= offset:
             break
-    return classobj.items[userinput-len(classobj.subclasses)]
+    return classobj.items[userinput-offset]
 def choose_item(parentid:int)->libclass.Item:
     '''引导用户选择物品
 parentid(int):已选择的父类别id

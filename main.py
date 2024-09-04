@@ -3,8 +3,8 @@
 #luggage-namager 行李管家
 #2024.8.26-2024.9.3
 
-VERSION = 'v2.0.1'
-VERCODE = 6
+VERSION = 'v2.0.2'
+VERCODE = 7
 FUNCTIONS = ('test','add','newclass')  # 功能列表，用于解析sys.argv[1]
 
 import sys,os,libfile
