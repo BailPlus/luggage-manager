@@ -9,13 +9,14 @@ parentid(int):已选择的父类别id
     while True:
         classobj:libclass.Class = libfile.read(parentid) # type: ignore
         libdebug.debug(classobj.subclasses)
+        # 显示子类别
         for i,j in enumerate(classobj.subclasses):
             print('\t'.join((str(i),str(libfile.read(j))+'/')))
-        userinput = input('请选择一个类别，以空行结束 >')
-        if userinput:
-            parentid = classobj.subclasses[int(userinput)]
-        else:
-            break
+            userinput = input('请选择一个类别，以空行结束 >')
+            if userinput:
+                parentid = classobj.subclasses[int(userinput)]
+            else:
+                break
     return parentid
 def choose_class(parentid:int=libfile.rootclass.id)->libclass.Class:
     '''引导用户选择类别
@@ -31,13 +32,23 @@ isshowclass(bool):是否显示子类别即是否允许进入子类别
 返回值:用户选择的物品id(int)'''
     while True:
         classobj:libclass.Class = libfile.read(parentid) # type: ignore
+        # 显示子类别
         if isshowclass:
             for i,j in enumerate(classobj.subclasses):
                 print('\t'.join((str(i),str(libfile.read(j))+'/')))
         offset = len(classobj.subclasses) if isshowclass else 0
+        # 显示类别下的物品
         for i,j in enumerate(classobj.items):
             print('\t'.join((str(i+offset),str(libfile.read(j)))))
-        userinput = int(input('请选择一个物品 >'))
+        # 获取用户输入
+        while True:
+            try:
+                userinput = int(input('请选择一个物品 >'))
+            except Exception:
+                print('输入有误，请重新输入')
+            else:
+                break
+        # 处理子类别相关
         if userinput >= offset:
             break
         else:
