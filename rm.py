@@ -9,6 +9,6 @@ def main(*args):
     originid = libchoose.choose_classid()
     origin:libclass.Class = libfile.read(originid) # type: ignore
     print('请选择要移动的物品')
-    itemid = libchoose.choose_itemid(originid)
+    itemid = libchoose.choose_itemid(originid,False)
     remove(itemid,origin)
     print('移除成功')

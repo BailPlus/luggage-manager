@@ -10,7 +10,7 @@ parentid(int):已选择的父类别id
         classobj:libclass.Class = libfile.read(parentid) # type: ignore
         libdebug.debug(classobj.subclasses)
         for i,j in enumerate(classobj.subclasses):
-            print('\t'.join((str(i),str(libfile.read(j)))))
+            print('\t'.join((str(i),str(libfile.read(j))+'/')))
         userinput = input('请选择一个类别，以空行结束 >')
         if userinput:
             parentid = classobj.subclasses[int(userinput)]
@@ -24,27 +24,30 @@ parentid(int):已选择的父类别id
     classid = choose_classid(parentid)
     classobj:libclass.Class = libfile.read(classid) # type: ignore
     return classobj
-def choose_itemid(parentid:int=libfile.rootclass.id)->int:
+def choose_itemid(parentid:int=libfile.rootclass.id,isshowclass:bool=True)->int:
     '''引导用户选择物品id
 parentid(int):已选择的父类别id
+isshowclass(bool):是否显示子类别即是否允许进入子类别
 返回值:用户选择的物品id(int)'''
     while True:
         classobj:libclass.Class = libfile.read(parentid) # type: ignore
-        for i,j in enumerate(classobj.subclasses):
-            print('\t'.join((str(i),str(libfile.read(j)))))
-        offset = len(classobj.subclasses)
-        print('-'*10)
+        if isshowclass:
+            for i,j in enumerate(classobj.subclasses):
+                print('\t'.join((str(i),str(libfile.read(j))+'/')))
+        offset = len(classobj.subclasses) if isshowclass else 0
         for i,j in enumerate(classobj.items):
             print('\t'.join((str(i+offset),str(libfile.read(j)))))
         userinput = int(input('请选择一个物品 >'))
         if userinput >= offset:
             break
+        else:
+            parentid = classobj.subclasses[userinput]
     return classobj.items[userinput-offset]
-def choose_item(parentid:int=libfile.rootclass.id)->libclass.Item:
+def choose_item(parentid:int=libfile.rootclass.id,isshowclass:bool=True)->libclass.Item:
     '''引导用户选择物品
 parentid(int):已选择的父类别id
 返回值:用户选择的物品(libclass.Class)'''
-    itemid = choose_itemid(parentid)
+    itemid = choose_itemid(parentid,isshowclass)
     itemobj:libclass.Item = libfile.read(itemid) # type: ignore
     return itemobj
 def choose_placeid()->int:
