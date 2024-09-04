@@ -7,7 +7,7 @@ def choose_classid(parentid:int=libfile.rootclass.id)->int:
 parentid(int):已选择的父类别id
 返回值:用户选择的子类别id(int)'''
     while True:
-        classobj:libclass.Class = libfile.read(parentid)
+        classobj:libclass.Class = libfile.read(parentid) # type: ignore
         libdebug.debug(classobj.subclasses)
         for i,j in enumerate(classobj.subclasses):
             print('\t'.join((str(i),str(libfile.read(j)))))
@@ -17,19 +17,19 @@ parentid(int):已选择的父类别id
         else:
             break
     return parentid
-def choose_class(parentid:int)->libclass.Class:
+def choose_class(parentid:int=libfile.rootclass.id)->libclass.Class:
     '''引导用户选择类别
 parentid(int):已选择的父类别id
 返回值:用户选择的子类别(libclass.Class)'''
     classid = choose_classid(parentid)
-    classobj = libfile.read(classid)
+    classobj:libclass.Class = libfile.read(classid) # type: ignore
     return classobj
-def choose_itemid(parentid:int)->int:
+def choose_itemid(parentid:int=libfile.rootclass.id)->int:
     '''引导用户选择物品id
 parentid(int):已选择的父类别id
 返回值:用户选择的物品id(int)'''
     while True:
-        classobj:libclass.Class = libfile.read(parentid)
+        classobj:libclass.Class = libfile.read(parentid) # type: ignore
         for i,j in enumerate(classobj.subclasses):
             print('\t'.join((str(i),str(libfile.read(j)))))
         offset = len(classobj.subclasses)
@@ -40,12 +40,12 @@ parentid(int):已选择的父类别id
         if userinput >= offset:
             break
     return classobj.items[userinput-offset]
-def choose_item(parentid:int)->libclass.Item:
+def choose_item(parentid:int=libfile.rootclass.id)->libclass.Item:
     '''引导用户选择物品
 parentid(int):已选择的父类别id
 返回值:用户选择的物品(libclass.Class)'''
     itemid = choose_itemid(parentid)
-    itemobj = libfile.read(itemid)
+    itemobj:libclass.Item = libfile.read(itemid) # type: ignore
     return itemobj
 def choose_placeid()->int:
     '''引导用户选择放置处id
@@ -55,11 +55,11 @@ def choose_placeid()->int:
     rootclass = libfile.rootclass
     for i in rootclass.subclasses:
         if str(libfile.read(i)) == '容器':
-            container_class = i
+            container_classid = i
             break
     else:
         raise KeyError('找不到容器类')
-    return choose_itemid(container_class)
+    return choose_itemid(container_classid)
 def choose_place()->libclass.Item:
     '''引导用户选择放置处
 返回值:放置处(libclass.Item)

@@ -29,6 +29,11 @@ itemid(int):物品对象id'''
     def addclass(self,classid:int):
         self.subclasses.append(classid)
         libfile.write(self)
+    def remove(self,itemid:int):
+        '''从类别中移除物品
+itemid(int):要移除的物品'''
+        self.items.remove(itemid)
+        libfile.write(self)
 class Item:
     '''物品类
 # 属性
