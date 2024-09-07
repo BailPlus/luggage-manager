@@ -55,4 +55,4 @@ placeid(int):物品放置位置对象id，位置一般为容器类别下的物�
         '''移动物品到某一位置
 target(int):移动目标id'''
         self.placeid = target
-        libfile.write(self,self.id)
+        libfile.write(self)

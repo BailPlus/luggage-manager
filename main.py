@@ -1,11 +1,11 @@
 #!/usr/bin/python3
 #Copyright Bail 2024
 #luggage-namager 行李管家
-#2024.8.26-2024.9.4
+#2024.8.26-2024.9.7
 
-VERSION = 'v2.2'
-VERCODE = 11
-FUNCTIONS = ('test','add','newclass','cp','mv','rm','where')  # 功能列表，用于解析sys.argv[1]
+VERSION = 'v2.3'
+VERCODE = 12
+FUNCTIONS = ('test','add','newclass','cp','mv','rm','where','put')  # 功能列表，用于解析sys.argv[1]
 
 import sys,os,libfile
 
