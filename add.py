@@ -1,7 +1,7 @@
 #luggage-manager:add 物品注册功能
 
 from libfile import *
-import libdebug,os,libclass,libchoose
+import libdebug,os,libclass,libchoose,photo
 
 nextids = {}
 
@@ -30,16 +30,6 @@ iscontainer(bool):是否添加容器
     item = libclass.Item(name,placeid if iscontainer else 0)
     itemclass.add(item.id)
     return item.id
-def takephoto(itemid:int):
-    '''拍照
-itemid(int):物品id，用作文件名
-需要在termux环境下运行'''
-    if not os.getenv('TERMUX_VERSION'):
-        print('非termux环境运行，跳过拍照')
-        return
-    filename = f'{IMG}/{itemid}.jpg'
-    os.system(f'termux-camera-photo {filename}')
-    __import__('imgcompress').compress((filename,))
 def main(args):
     if not args:
         interactive()
@@ -49,5 +39,5 @@ def main(args):
         else:
             itemid = add(args[0],False if '--no-container' in args else True)
             if '--no-photo' not in args:
-                takephoto(itemid)
+                photo.takephoto(itemid)
             print('注册成功！')
